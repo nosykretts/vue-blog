@@ -1,17 +1,13 @@
 <template>
-  <div id="app">
-    <router-view/>
-  </div>
+  <h1>Admin Page</h1>
 </template>
 
 <script>
 export default {
-  name: 'app',
-};
+  name: 'AdminIndex'
+}
 </script>
 
 <style>
 
-
 </style>
-

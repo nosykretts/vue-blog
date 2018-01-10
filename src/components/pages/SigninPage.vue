@@ -1,17 +1,13 @@
 <template>
-  <div id="app">
-    <router-view/>
-  </div>
+  <h1>Sign In</h1>
 </template>
 
 <script>
 export default {
-  name: 'app',
-};
+  name : 'SigninPage'
+}
 </script>
 
 <style>
 
-
 </style>
-
