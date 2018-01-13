@@ -1,111 +1,114 @@
-import axios from 'axios'
+import axios from 'axios';
 
 const state = {
-  posts : [],
-  post : null
-}
+  posts: [],
+  post: {},
+};
 
 const getters = {
   posts: state => state.posts,
-  post: state => state.post
-}
+  post: state => state.post,
+};
 
 const actions = {
-  getPosts({commit}){
+  getPosts({ commit }) {
     axios.get('/posts')
-    .then(({data}) => {
+    .then(({ data }) => {
       commit('getPostsSuccess', {
-        posts : data.data
-      })
+        posts: data.data,
+      });
     })
-    .catch(err => {
-      console.error(err.response.data.message)
-    })  
+    .catch((err) => {
+      console.error(err.response.data.message);
+    });
   },
-  getPost({commit}, {id}){
+  getPost({ commit }, { id }) {
     return new Promise((resolve, reject) => {
       axios.get(`/posts/${id}`)
-      .then(({data}) => {
+      .then(({ data }) => {
         commit('getPostSuccess', {
-          post : data.data
-        })
-        resolve()
+          post: data.data,
+        });
+        resolve();
       })
-      .catch(err => {
-        console.error(err.response.data.message)
-        reject(err)
-      })
-    })
+      .catch((err) => {
+        console.error(err.response.data.message);
+        reject(err);
+      });
+    });
   },
-  createPost({commit}){
+  createPost({ commit }) {
     return new Promise((resolve, reject) => {
       axios.post('/posts')
-      .then(({data}) => {
+      .then(({ data }) => {
         commit('createPostSuccess', {
-          post : data.data
-        })
+          post: data.data,
+        });
       })
-      .catch(err => {
-        console.error(err.response.data.message)
-        reject(err)
-      })
-    })
-  },  
-  updatePost({commit}, {id, post}){
+      .catch((err) => {
+        console.error(err.response.data.message);
+        reject(err);
+      });
+    });
+  },
+  updatePost({ commit }, { id, post }) {
     return new Promise((resolve, reject) => {
       axios.put(`/posts/${id}`)
-      .then(({data}) => {
+      .then(({ data }) => {
         commit('updatePostSuccess', {
-          post : data.data
-        })
+          post: data.data,
+        });
       })
-      .catch(err => {
-        console.error(err.response.data.message)
-        reject(err)
-      })
-    })
+      .catch((err) => {
+        console.error(err.response.data.message);
+        reject(err);
+      });
+    });
   },
-  deletePost({commit}, {id}){
-    axios.delete(`/posts/${id}`)
-    .then(() => {
-      commit('deletePostSuccess', {id})
-    })
-    .catch(err => {
-      console.error(err.response.data.message)
-      reject(err)
-    })
-  }
-}
+  deletePost({ commit }, { id }) {
+    return new Promise((resolve, reject) => {
+      axios.delete(`/posts/${id}`)
+      .then(() => {
+        commit('deletePostSuccess', { id });
+        resolve();
+      })
+      .catch((err) => {
+        console.error(err.response.data.message);
+        reject(err);
+      });
+    });
+  },
+};
 
 const mutations = {
-  getPostsSuccess(state, {posts}){
-    state.posts = posts
+  getPostsSuccess(state, { posts }) {
+    state.posts = posts;
   },
-  getPostSuccess(state, {post}){
-    state.post = post
+  getPostSuccess(state, { post }) {
+    state.post = post;
   },
-  createPostSuccess(state, {post}){
+  createPostSuccess(state, { post }) {
     state.posts = [
       ...state.posts,
-      posts
-    ]
+      posts,
+    ];
   },
-  updatePostSuccess(state, {post}){
-    state.posts = state.posts.map(postItem => {
-      if(postItem._id == post._id){
-        return post
+  updatePostSuccess(state, { post }) {
+    state.posts = state.posts.map((postItem) => {
+      if (postItem._id == post._id) {
+        return post;
       }
-      return postItem
-    })
+      return postItem;
+    });
   },
-  deletePostSuccess(state, {id}){
-    state.posts = state.posts.filter(postItem => postItem._id !== id)
-  }
-}
+  deletePostSuccess(state, { id }) {
+    state.posts = state.posts.filter(postItem => postItem._id !== id);
+  },
+};
 
 export default {
   state,
   getters,
   actions,
   mutations,
-}
+};

@@ -1,11 +1,11 @@
 <template>
-  <h1>Admin Page</h1>
+  <h1>Admin Index</h1>
 </template>
 
 <script>
 export default {
-  name: 'AdminIndex'
-}
+  name: 'AdminIndex',
+};
 </script>
 
 <style>

@@ -4,8 +4,8 @@
 
 <script>
 export default {
-  name : 'SigninPage'
-}
+  name: 'SigninPage',
+};
 </script>
 
 <style>

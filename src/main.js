@@ -3,18 +3,17 @@
 import Vue from 'vue';
 import iView from 'iview';
 import axios from 'axios';
-import moment from 'moment'
+import moment from 'moment';
 import App from './App';
 import router from './router';
-import store from './store'
+import store from './store';
 import 'iview/dist/styles/iview.css';
 
 
-
 Vue.config.productionTip = false;
-Vue.prototype.moment = moment
-axios.defaults.baseURL = 'http://x.fajarpatappari.tk:3000/api'
-axios.defaults.headers.common.Authorization = localStorage.getItem('token')
+Vue.prototype.moment = moment;
+axios.defaults.baseURL = 'http://x.fajarpatappari.tk:3000/api';
+axios.defaults.headers.common.Authorization = localStorage.getItem('token');
 
 Vue.use(iView);
 
@@ -24,7 +23,7 @@ new Vue({
   el: '#app',
   router,
   store,
-  render : h => h(App)
+  render: h => h(App),
   // template: '<App/>',
   // components: { App },
 });

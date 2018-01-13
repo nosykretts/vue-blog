@@ -9,13 +9,13 @@ import PostCardItem from './PostCardItem';
 
 export default {
   name: 'PostList',
-  props : ['posts'],
-  components : { PostCardItem },
-  data (){
+  props: ['posts'],
+  components: { PostCardItem },
+  data() {
     return {
       
-    }
-  }
+    };
+  },
 };
 </script>
 

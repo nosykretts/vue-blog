@@ -32,12 +32,12 @@
 export default {
   name: 'MainHeader',
   methods: {
-    onSelected(name){
+    onSelected(name) {
       this.$router.push({
-        name
-      })
-    }
-  }
+        name,
+      });
+    },
+  },
 };
 </script>
 

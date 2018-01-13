@@ -14,6 +14,9 @@ export default {
 .layout{
   border: none;
 }
+/* .ivu-menu-vertical{
+  min-height: 60vh;
+} */
 
 </style>
 

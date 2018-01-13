@@ -4,8 +4,8 @@
 
 <script>
 export default {
-  name : 'SignupPage'
-}
+  name: 'SignupPage',
+};
 </script>
 
 <style>
