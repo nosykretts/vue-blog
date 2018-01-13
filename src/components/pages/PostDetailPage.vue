@@ -1,15 +1,15 @@
 <template>
   <div v-if="post">
-    <img :src="post.imageUrl">
+    <div class="image-wrapper">      
+      <img :src="post.imageUrl">
+    </div>
     <Card>
-      <bigger><h1>{{post.title}}</h1></bigger>
+      <big><h1>{{post.title}}</h1></big>
       <br>
       <p><strong>Posted:</strong> {{moment(post.createdAt).fromNow()}}</p>
-      <p><strong>By:</strong> {{post.creator}}</p>
-      <br>
+      <p><strong>By:</strong> {{post.creator.name}}</p>
       <div class="article-content" v-html="post.article">
       </div>
-      <pre>{{JSON.stringify(post, null, 2)}}</pre>
     </Card>
   </div>
 </template>
@@ -37,8 +37,16 @@ export default {
 <style>
 .article-content{
   margin-top: 20px;
+  font-size: 120%;
 }
 .article-content p {
   margin-bottom: 15px;
+}
+.image-wrapper{
+  min-height: 200px;
+  margin: -30px -20px -40px -20px;
+}
+.image-wrapper > img{
+  width: 100%;
 }
 </style>

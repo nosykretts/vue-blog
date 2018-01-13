@@ -2,9 +2,8 @@
  <div class="layout">
         <Layout>
             <main-header/>
-            <Content :style="{padding: '0 20px'}">
-                <router-view/>
-            </Content>
+            
+            <router-view/>
             <Footer class="layout-footer-center">2018 &copy; Fajar Patappari</Footer>
         </Layout>
     </div>
@@ -21,10 +20,8 @@ export default {
 
 <style scoped>
 .layout{
-    border: 1px solid #d7dde4;
     background: #f5f7f9;
     position: relative;
-  
     overflow: hidden;
 }
 .layout-logo{

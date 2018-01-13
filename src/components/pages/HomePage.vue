@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <Content :style="{padding: '0 20px'}">
     <h1>This is Home</h1>
     <br><br><br>
      <post-list :posts="posts"/>
-  </div>
+  </Content>
 </template>
 
 <script>
