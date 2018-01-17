@@ -1,6 +1,6 @@
 <template>
     <Timeline>
-      <post-card-item v-for="post in posts" :key="post._id" :post="post"/>    
+      <post-card-item :manage="manage" v-for="post in posts" :key="post._id" :post="post"/>    
     </Timeline>
 </template>
 
@@ -9,7 +9,7 @@ import PostCardItem from './PostCardItem';
 
 export default {
   name: 'PostList',
-  props: ['posts'],
+  props: ['posts', 'manage'],
   components: { PostCardItem },
   data() {
     return {

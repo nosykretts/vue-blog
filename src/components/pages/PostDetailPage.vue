@@ -11,7 +11,7 @@
       <p>
         <strong>Posted:</strong> {{moment(post.createdAt).fromNow()}}</p>
       <p>
-        <strong>By:</strong> {{post.creator.name}}</p>
+        <!-- <strong>By:</strong> {{post.creator.name}}</p> -->
       <div class="article-content" v-html="post.article">
       </div>
     </Card>

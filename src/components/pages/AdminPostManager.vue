@@ -3,7 +3,7 @@
     <h1>Manage Posts</h1>
     router
     <br>
-    <post-list :posts="posts" />
+    <post-list :posts="posts" :manage="true" />
   </div>
 </template>
 

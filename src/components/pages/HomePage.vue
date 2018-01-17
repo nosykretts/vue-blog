@@ -2,7 +2,7 @@
   <Content :style="{padding: '0 20px'}">
     <h1>This is Home</h1>
     <br><br><br>
-     <post-list :posts="posts"/>
+     <post-list :posts="posts" :manage="false"/>
      
   </Content>
 </template>
