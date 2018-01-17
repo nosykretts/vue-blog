@@ -11,7 +11,7 @@
         <editor class="editor-content" :text='postForm.article'></editor>
       </FormItem>
       <FormItem>
-        <Button type="primary" @click="handleSubmit('formInline')">Signin</Button>
+        <Button type="primary" @click="handleSubmit('formInline')" size="large">SUBMIT</Button>
     </FormItem>      
     </Form>    
   </div>

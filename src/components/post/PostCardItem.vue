@@ -34,7 +34,7 @@ export default {
       },
       toEdit: {
         name: 'PostEdit',
-        params: { id: this.post._id }
+        params: { id: this.post._id },
       },
     };
   },

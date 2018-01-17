@@ -13,7 +13,7 @@ export default {
   components: { PostCardItem },
   data() {
     return {
-      
+
     };
   },
 };
