@@ -58,7 +58,6 @@ export default {
     handleSubmit(name) {
       this.$refs[name].validate(valid => {
         if (valid) {
-          console.log('kesini', this.$store)
           this.$store.dispatch('signin', {
             email: this.formInline.email,
             password: this.formInline.password,

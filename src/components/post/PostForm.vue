@@ -39,7 +39,7 @@ export default {
     return {
       editLoaded: false,
       postForm: {
-        title: 'dasdasd',
+        title: '',
         imageUrl: '',
         article: ''
       }
@@ -69,7 +69,6 @@ export default {
   computed: {
     post: {
       get() {
-        console.log(this.$store.getters);
         
         return this.$store.getters.post
       },
@@ -77,6 +76,9 @@ export default {
     }
   },
   watch: {
+    id(newVal,OldVal){
+      console.log('changed id')
+    },
     post: {
       deep: true,
       handler(post) {

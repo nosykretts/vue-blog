@@ -1,5 +1,5 @@
 <template>
-  <div v-if="post">
+  <div v-if="post" class="main-article">
     <div class="image-wrapper">
       <img :src="post.imageUrl">
     </div>
@@ -39,6 +39,12 @@ export default {
 </script>
 
 <style>
+.main-article{
+  max-width:900px;
+  margin-left: auto;
+  margin-right:auto;
+
+}
 .article-content {
   margin-top: 20px;
   font-size: 120%;

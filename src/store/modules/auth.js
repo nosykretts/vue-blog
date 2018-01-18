@@ -1,6 +1,7 @@
 import axios from 'axios'
 import * as types from '../mutationTypes'
 
+
 const state = {
   isLoggedIn: localStorage.getItem('token') !== null
 }
@@ -11,7 +12,8 @@ const getters = {
 
 const actions = {
   signin({ commit }, { email, password }) {
-    axios
+    return new Promise((resolve, reject) => {
+      axios
       .post('/auth/signin', {
         email,
         password
@@ -21,10 +23,13 @@ const actions = {
           token: data.data.token
         })
         commit(types.NOTIFY_SUCCESS, 'Sign in success', { root: true })
+        resolve()
       })
       .catch(err => {
         commit(types.NOTIFY_ERROR, err.response.data.message, { root: true })
+        reject(err)
       })
+    })
   },
   signup({ commit }, { name, email, username, password }) {
     axios
