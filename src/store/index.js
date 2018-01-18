@@ -10,7 +10,7 @@ export default new Vuex.Store({
   modules: {
     post,
     auth,
-    notify
+    notify,
   },
   strict: true,
 });

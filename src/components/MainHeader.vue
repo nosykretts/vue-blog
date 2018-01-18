@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'MainHeader',
@@ -37,19 +37,19 @@ export default {
     onSelected(name) {
       if (name == 'Signout') {
         this.$store.dispatch('signout').then(() => {
-          this.$router.push({ name: 'HomePage' })
-        })
+          this.$router.push({ name: 'HomePage' });
+        });
       } else {
         this.$router.push({
-          name
-        })
+          name,
+        });
       }
-    }
+    },
   },
   computed: {
-    ...mapGetters(['isLoggedIn'])
-  }
-}
+    ...mapGetters(['isLoggedIn']),
+  },
+};
 </script>
 
 <style>

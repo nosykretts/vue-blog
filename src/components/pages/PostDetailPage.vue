@@ -40,7 +40,8 @@ export default {
 
 <style>
 .main-article{
-  max-width:900px;
+  width:900px;
+
   margin-left: auto;
   margin-right:auto;
 

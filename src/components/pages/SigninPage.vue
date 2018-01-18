@@ -28,49 +28,49 @@ export default {
     return {
       formInline: {
         email: '',
-        password: ''
+        password: '',
       },
       ruleInline: {
         email: [
           {
             required: true,
             message: 'Please fill in the email',
-            trigger: 'blur'
-          }
+            trigger: 'blur',
+          },
         ],
         password: [
           {
             required: true,
             message: 'Please fill in the password.',
-            trigger: 'blur'
+            trigger: 'blur',
           },
           {
             type: 'string',
             min: 2,
             message: 'The password length cannot be less than 3 character',
-            trigger: 'blur'
-          }
-        ]
-      }
-    }
+            trigger: 'blur',
+          },
+        ],
+      },
+    };
   },
   methods: {
     handleSubmit(name) {
-      this.$refs[name].validate(valid => {
+      this.$refs[name].validate((valid) => {
         if (valid) {
           this.$store.dispatch('signin', {
             email: this.formInline.email,
             password: this.formInline.password,
-          }).then(()=> {
-            this.$router.push({name: 'AdminIndex'})
-          })
+          }).then(() => {
+            this.$router.push({ name: 'AdminIndex' });
+          });
         } else {
-          this.$Message.error('Please correct your input!')
+          this.$Message.error('Please correct your input!');
         }
-      })
-    }
-  }
-}
+      });
+    },
+  },
+};
 </script>
 
 <style>

@@ -6,76 +6,86 @@ const state = {
 };
 
 const getters = {
-  posts: state => state.posts,
+  posts: state => state.posts.slice().reverse(),
   post: state => state.post,
 };
 
 const actions = {
   getPosts({ commit }) {
-    axios.get('/posts')
-    .then(({ data }) => {
-      commit('getPostsSuccess', {
-        posts: data.data,
+    axios
+      .get('/posts')
+      .then(({ data }) => {
+        commit('getPostsSuccess', {
+          posts: data.data,
+        });
+      })
+      .catch((err) => {
+        console.error(err.response.data.message);
       });
-    })
-    .catch((err) => {
-      console.error(err.response.data.message);
-    });
   },
   getPost({ commit }, { id }) {
     return new Promise((resolve, reject) => {
-      axios.get(`/posts/${id}`)
-      .then(({ data }) => {
-        commit('getPostSuccess', {
-          post: data.data,
+      axios
+        .get(`/posts/${id}`)
+        .then(({ data }) => {
+          commit('getPostSuccess', {
+            post: data.data,
+          });
+          resolve();
+        })
+        .catch((err) => {
+          console.error(err.response.data.message);
+          reject(err);
         });
-        resolve();
-      })
-      .catch((err) => {
-        console.error(err.response.data.message);
-        reject(err);
-      });
     });
   },
-  createPost({ commit }) {
+  createPost({ commit }, { title, imageUrl, article }) {
     return new Promise((resolve, reject) => {
-      axios.post('/posts')
-      .then(({ data }) => {
-        commit('createPostSuccess', {
-          post: data.data,
+      axios
+        .post('/posts', { title, imageUrl, article })
+        .then(({ data }) => {
+          commit('createPostSuccess', {
+            post: data.data,
+          });
+          resolve();
+        })
+        .catch((err) => {
+          console.error(err.response.data.message);
+          reject(err);
         });
-      })
-      .catch((err) => {
-        console.error(err.response.data.message);
-        reject(err);
-      });
     });
   },
-  updatePost({ commit }, { id, post }) {
+  updatePost({ commit }, { id, title, imageUrl, article }) {
     return new Promise((resolve, reject) => {
-      axios.put(`/posts/${id}`)
-      .then(({ data }) => {
-        commit('updatePostSuccess', {
-          post: data.data,
+      axios
+        .put(`/posts/${id}`, {
+          title,
+          imageUrl,
+          article,
+        })
+        .then(({ data }) => {
+          commit('updatePostSuccess', {
+            post: data.data,
+          });
+        })
+        .catch((err) => {
+          console.error(err.response.data.message);
+          reject(err);
         });
-      })
-      .catch((err) => {
-        console.error(err.response.data.message);
-        reject(err);
-      });
     });
   },
   deletePost({ commit }, { id }) {
     return new Promise((resolve, reject) => {
-      axios.delete(`/posts/${id}`)
-      .then(() => {
-        commit('deletePostSuccess', { id });
-        resolve();
-      })
-      .catch((err) => {
-        console.error(err.response.data.message);
-        reject(err);
-      });
+      axios
+        .delete(`/posts/${id}`)
+        .then(() => {
+          commit('deletePostSuccess', { id });
+          resolve();
+        })
+        .catch((err) => {
+          console.error(err.response.data.message);
+          reject(err);
+        });
     });
   },
 };
@@ -88,10 +98,7 @@ const mutations = {
     state.post = post;
   },
   createPostSuccess(state, { post }) {
-    state.posts = [
-      ...state.posts,
-      posts,
-    ];
+    state.posts = [...state.posts, posts];
   },
   updatePostSuccess(state, { post }) {
     state.posts = state.posts.map((postItem) => {

@@ -12,7 +12,7 @@ import PostForm from '@/components/post/PostForm';
 
 Vue.use(Router);
 
-let router = new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -35,7 +35,7 @@ let router = new Router({
     {
       path: '/my',
       component: AdminLayout,
-      
+      meta: { requireAuth: true },
       children: [
         {
           path: '',
@@ -82,15 +82,15 @@ let router = new Router({
 router.beforeEach((to, from, next) => {
   if (to.matched.some(route => route.meta.requireAuth)) {
     if (localStorage.getItem('token')) {
-      next()
+      next();
     } else {
-      next({ name: 'Signin' })
+      next({ name: 'Signin' });
     }
   } else if (to.name === 'Signin' && localStorage.getItem('token')) {
-    next(false)
+    next(false);
   } else {
-    next()
+    next();
   }
-})
+});
 
-export default router
+export default router;

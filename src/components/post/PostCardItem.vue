@@ -30,27 +30,27 @@ export default {
     return {
       toDetail: {
         name: 'PostDetailPage',
-        params: { id: this.post._id }
+
+        params: { id: this.post._id },
       },
       toEdit: {
         name: 'PostEdit',
-        params: { id: this.post._id }
-      }
-    }
+        params: { id: this.post._id },
+      },
+    };
   },
   methods: {
     handleDelete() {
       this.$store
         .dispatch('deletePost', {
-          id: this.post._id
+          id: this.post._id,
         })
         .then(() => {
-          this.$Message.success('Post delete successfull')
-        })
-        .catch(console.error)
-    }
-  }
-}
+          this.$Message.success('Post delete successfull');
+        });
+    },
+  },
+};
 </script>
 
 <style>
