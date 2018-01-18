@@ -35,7 +35,7 @@ export default {
   name: 'MainHeader',
   methods: {
     onSelected(name) {
-      if (name == 'Signout') {
+      if (name === 'Signout') {
         this.$store.dispatch('signout').then(() => {
           this.$router.push({ name: 'HomePage' });
         });

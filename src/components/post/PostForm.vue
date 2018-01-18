@@ -9,7 +9,7 @@
         <Input placeholder="Post Image" v-model="postForm.imageUrl"></Input>
       </FormItem>
       <FormItem label="Article Content">
-        <Input type="textarea" :min="10" v-model="postForm.article"></Input>
+        <Input type="textarea"  :min="10" v-html="postForm.article"></Input>
       </FormItem>
       <FormItem>
         <Button type="primary" @click="handleSubmit" size="large">SUBMIT</Button>
@@ -19,79 +19,70 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import editor from 'vue2-medium-editor';
+import { mapGetters, mapActions } from 'vuex'
+import editor from 'vue2-medium-editor'
 
 export default {
   name: 'PostForm',
   props: ['id'],
   components: {
-    editor,
+    editor
   },
   mounted() {
-    console.log('mounted');
-    if (this.id) {
-      this.getPost({ id: this.id });
-    } else {
-      this.editLoaded = true;
-    }
+    this.fillData()
   },
   data() {
     return {
       editLoaded: false,
       postForm: {
+        id: this.id,
         title: '',
         imageUrl: '',
-        article: '',
-      },
-    };
+        article: ''
+      }
+    }
   },
   methods: {
     ...mapActions(['getPost']),
+    fillData() {
+      console.log('fillData', this.id)
+      if (this.id) {
+        this.getPost({ id: this.id }).then(() =>{
+          this.postForm = this.$store.getters.post
+        })
+      } else {
+        this.postForm = {}
+        this.editLoaded = true
+      }
+    },
     handleSubmit() {
       const dispatch = this.id ? 'updatePost' : 'createPost';
-      this.$store
-        .dispatch(dispatch, {
-          id: this.id,
-          title: this.postForm.title,
-          imageUrl: this.postForm.imageUrl,
-          article: this.postForm.article,
-        })
-        .then((newId) => {
-          this.$router.push({
-            name: 'AdminPostManager',
-            params: {
-              id: this.id || newId,
-            },
-          });
+      this.$store.dispatch(dispatch, this.postForm).then((newId) => {
+        this.$router.push({
+          name: 'AdminPostManager',
+          params: {
+            id: this.id || newId,
+          },
         });
+      });
     },
   },
   computed: {
-    post: {
-      get() {
-        return this.$store.getters.post;
-      },
-      set() {},
+    post() {
+      return this.$store.getters.post;
     },
   },
   watch: {
-    id(newVal) {
-      console.log('changed id', newVal);
+    id(a, b) {
+      this.fillData()
     },
-    post: {
-      deep: true,
-      handler(post) {
-        this.formQuestion = {
-          title: post.title,
-          imageUrl: post.imageUrl,
-          article: post.article,
-        };
-        this.editLoaded = true;
-      },
-    },
+    post(){
+      console.log('channged')
+      this.editLoaded = true
+    }
   },
 };
+
 </script>
 
 <style>

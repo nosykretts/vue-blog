@@ -12,7 +12,8 @@ import 'iview/dist/styles/iview.css';
 
 Vue.config.productionTip = false;
 Vue.prototype.moment = moment;
-axios.defaults.baseURL = 'http://api.fajarpatappari.tk:3005/api';
+// axios.defaults.baseURL = 'http://api.fajarpatappari.tk:3005/api';
+axios.defaults.baseURL = 'http://localhost:3000/api';
 axios.defaults.headers.common.Authorization = localStorage.getItem('token');
 
 Vue.use(iView);

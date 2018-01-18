@@ -15,6 +15,8 @@
       <router-link :to="toDetail">
         <h2 class="post-card-title">{{post.title}}</h2>
       </router-link>
+      <p>
+        <strong>Posted by:</strong> {{post.creator.name}}</p><br>
       <p class="content">{{post.firstParagraph}}..
         <router-link :to="toDetail">read&nbsp;more</router-link>
       </p>
