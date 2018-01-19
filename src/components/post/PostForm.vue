@@ -9,7 +9,8 @@
         <Input placeholder="Post Image" v-model="postForm.imageUrl"></Input>
       </FormItem>
       <FormItem label="Article Content">
-        <Input type="textarea"  :min="10" v-html="postForm.article"></Input>
+         <editor v-on:edit='processEditOperation' class="editor-content" :text="id? postForm.article : ''" placeholder="Type your article"></editor>
+        <!-- <Input type="textarea"  :min="10" v-html="postForm.article"></Input> -->
       </FormItem>
       <FormItem>
         <Button type="primary" @click="handleSubmit" size="large">SUBMIT</Button>
@@ -21,6 +22,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import editor from 'vue2-medium-editor'
+
 
 export default {
   name: 'PostForm',
@@ -44,11 +46,16 @@ export default {
   },
   methods: {
     ...mapActions(['getPost']),
+    processEditOperation (operation) {
+      this.postForm.article = operation.api.origElements.innerHTML
+    },
     fillData() {
       console.log('fillData', this.id)
       if (this.id) {
         this.getPost({ id: this.id }).then(() =>{
-          this.postForm = this.$store.getters.post
+          this.postForm = {
+            ...this.$store.getters.post
+          }
         })
       } else {
         this.postForm = {}
@@ -58,11 +65,9 @@ export default {
     handleSubmit() {
       const dispatch = this.id ? 'updatePost' : 'createPost';
       this.$store.dispatch(dispatch, this.postForm).then((newId) => {
+        console.log('selesai')
         this.$router.push({
           name: 'AdminPostManager',
-          params: {
-            id: this.id || newId,
-          },
         });
       });
     },
@@ -77,7 +82,6 @@ export default {
       this.fillData()
     },
     post(){
-      console.log('channged')
       this.editLoaded = true
     }
   },

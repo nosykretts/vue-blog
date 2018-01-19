@@ -56,6 +56,7 @@ const actions = {
     });
   },
   updatePost({ commit }, { id, title, imageUrl, article }) {
+    console.log('keisnis')
     return new Promise((resolve, reject) => {
       axios
         .put(`/posts/${id}`, {
@@ -68,6 +69,7 @@ const actions = {
             post: data.data,
           });
         })
+        resolve()
         .catch((err) => {
           console.error(err.response.data.message);
           reject(err);
